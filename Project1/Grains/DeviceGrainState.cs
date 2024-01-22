@@ -2,13 +2,14 @@
 
 namespace Project1.Grains
 {
+    [GenerateSerializer]
     public class DeviceGrainState
     {
         public DateTimeOffset? ScheduledDateTime { get; set; }
 
         public DeviceGrainState Apply(DeviceUpdateScheduledEvent @event)
         {
-            ScheduledDateTime = @event.scheduledDateTime;
+            ScheduledDateTime = @event.scheduledDateTime;   
             return this;
         }
 

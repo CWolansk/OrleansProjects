@@ -1,4 +1,5 @@
 ﻿using Orleans.EventSourcing;
+using Orleans.Providers;
 using Orleans.Runtime;
 using Project1.DomainEvents;
 
@@ -6,37 +7,57 @@ namespace Project1.Grains
 {
     public interface IDeviceGrain : IGrainWithStringKey
     {
+        Task ScheduleUpdate(DateTimeOffset dateTime);
 
+        Task EditScheduledUpdate(DateTimeOffset dateTime);
+
+        Task<DeviceGrainState> GetState();
+
+        Task<List<DomainEventBase>> GetEvents();
     }
 
+    [StorageProvider(ProviderName = "OrleansLocalStorage")]
+    [LogConsistencyProvider(ProviderName = "LogStorage")]
     public class DeviceGrain: JournaledGrain<DeviceGrainState, DomainEventBase>, IDeviceGrain
     {
-        private readonly IPersistentState<DeviceGrainState> _state;
-        
-        public DeviceGrain(
-            [PersistentState(stateName: "device", storageName: "devices")] IPersistentState<DeviceGrainState> state )
+        public async Task<List<DomainEventBase>> GetEvents()
         {
-            _state = state;
+            var events = await this.RetrieveConfirmedEvents(0, Version);
+
+            var listOfEvents = events.ToList();
+
+            return listOfEvents;
         }
 
-        public Task ScheduleUpdate(DateTimeOffset dateTime)
+        public async Task<DeviceGrainState> GetState()
+        {
+            return this.State;
+        }
+
+        public async Task ScheduleUpdate(DateTimeOffset dateTime)
         {
             RaiseEvent(new DeviceUpdateScheduledEvent
             {
-                scheduledDateTime = dateTime
+                DeviceId = IdentityString,
+                scheduledDateTime = dateTime,
+                Version = Version + 1,
+                TimeStamp = DateTimeOffset.UtcNow
             });
 
-            return ConfirmEvents();
+            await ConfirmEvents();
         }
 
-        public Task EditScheduledUpdate(DateTimeOffset dateTime)
+        public async Task EditScheduledUpdate(DateTimeOffset dateTime)
         {
             RaiseEvent(new DeviceUpdateScheduleEditedEvent
             {
-                editedScheduledDateTime = dateTime
+                DeviceId = IdentityString,
+                editedScheduledDateTime = dateTime,
+                Version = Version + 1,
+                TimeStamp = DateTimeOffset.UtcNow
             });
 
-            return ConfirmEvents();
+            await ConfirmEvents();
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿namespace Project1.DomainEvents
 {
+    [GenerateSerializer]
     public class DomainEventBase
     {
         public string DeviceId { get; set; }
