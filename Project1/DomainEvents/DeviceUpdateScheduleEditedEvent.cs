@@ -1,6 +1,6 @@
 ﻿namespace Project1.DomainEvents
 {
-    public class DeviceUpdateScheduleEdited : DomainEventBase
+    public class DeviceUpdateScheduleEditedEvent : DomainEventBase
     {
         public DateTimeOffset editedScheduledDateTime;
     }

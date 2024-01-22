@@ -19,5 +19,25 @@ namespace Project1.Grains
             _state = state;
         }
 
+        public Task ScheduleUpdate(DateTimeOffset dateTime)
+        {
+            RaiseEvent(new DeviceUpdateScheduledEvent
+            {
+                scheduledDateTime = dateTime
+            });
+
+            return ConfirmEvents();
+        }
+
+        public Task EditScheduledUpdate(DateTimeOffset dateTime)
+        {
+            RaiseEvent(new DeviceUpdateScheduleEditedEvent
+            {
+                editedScheduledDateTime = dateTime
+            });
+
+            return ConfirmEvents();
+        }
+
     }
 }
