@@ -11,6 +11,7 @@ namespace Project1.Grains
 
         Task EditScheduledUpdate(DateTimeOffset dateTime);
 
+        [Alias("GetState")]
         Task<DeviceGrainState> GetState();
 
         Task<List<DomainEventBase>> GetEvents();
@@ -29,16 +30,13 @@ namespace Project1.Grains
             return listOfEvents;
         }
 
-        public async Task<DeviceGrainState> GetState()
-        {
-            return this.State;
-        }
+        public Task<DeviceGrainState> GetState() => Task.FromResult(this.State);
 
         public async Task ScheduleUpdate(DateTimeOffset dateTime)
         {
             RaiseEvent(new DeviceUpdateScheduledEvent
             {
-                DeviceId = IdentityString,
+                Id = this.GetPrimaryKeyString(),
                 scheduledDateTime = dateTime,
                 Version = Version + 1,
                 TimeStamp = DateTimeOffset.UtcNow
@@ -51,7 +49,7 @@ namespace Project1.Grains
         {
             RaiseEvent(new DeviceUpdateScheduleEditedEvent
             {
-                DeviceId = IdentityString,
+                Id = this.GetPrimaryKeyString(),
                 editedScheduledDateTime = dateTime,
                 Version = Version + 1,
                 TimeStamp = DateTimeOffset.UtcNow

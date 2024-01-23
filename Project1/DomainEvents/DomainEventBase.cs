@@ -3,10 +3,13 @@
     [GenerateSerializer]
     public class DomainEventBase
     {
-        public string DeviceId { get; set; }
+        [Id(0)]
+        public string Id { get; set; }
 
+        [Id(1)]
         public int Version { get; set; } = 0;
-        
-        public DateTimeOffset TimeStamp = DateTimeOffset.Now;
+
+        [Id(2)]
+        public DateTimeOffset TimeStamp { get; set; } = DateTimeOffset.Now;
     }
 }
