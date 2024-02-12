@@ -55,7 +55,7 @@ namespace Project1.Controllers
             //Command
             var command = new CustomerScheduledUpdateRequestV1Command
             {
-                DeviceId = request.DeviceId,
+                DeviceIds = request.DeviceIds,
                 ScheduledStartTime = request.ScheduledStartTime,
             };
 

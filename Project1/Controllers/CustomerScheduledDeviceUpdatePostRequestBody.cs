@@ -2,7 +2,7 @@
 {
     public class CustomerScheduledDeviceUpdatePostRequestBody
     {
-        public string DeviceId { get; set; }
+        public List<string> DeviceIds { get; set; }
 
         public DateTime ScheduledStartTime { get; set; }
     }

@@ -1,12 +1,27 @@
 ﻿using MediatR;
+using Project1.Grains;
 
 namespace Project1.Commands
 {
     public class CustomerScheduledUpdatePostCommandHandler : IRequestHandler<CustomerScheduledUpdateRequestV1Command, CustomerScheduledUpdateRequestV1CommandResult>
     {
-        public Task<CustomerScheduledUpdateRequestV1CommandResult> Handle(CustomerScheduledUpdateRequestV1Command request, CancellationToken cancellationToken)
+        private readonly IGrainFactory _grains;
+
+        public CustomerScheduledUpdatePostCommandHandler(IGrainFactory grains)
         {
-            throw new NotImplementedException();
+            _grains = grains;
+        }
+
+        public async Task<CustomerScheduledUpdateRequestV1CommandResult> Handle(CustomerScheduledUpdateRequestV1Command request, CancellationToken cancellationToken)
+        {
+            foreach(var deviceId in request.DeviceIds)
+            {
+                var grain = _grains.GetGrain<IDeviceGrain>(deviceId);
+
+                await grain.ScheduleUpdate(request.ScheduledStartTime);
+            }
+
+            return new CustomerScheduledUpdateRequestV1CommandResult{};
         }
     }
 }

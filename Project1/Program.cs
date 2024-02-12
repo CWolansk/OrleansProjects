@@ -16,8 +16,7 @@ builder.Host.UseOrleans(siloBuilder =>
     {
         x.HostSelf = true;
         x.Port = 8080;
-        }
-    );
+    });
 });
 
 builder.Services.AddControllers();
