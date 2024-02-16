@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project1", "Project1.csproj", "{947D82A1-30ED-4B1E-A993-53EDE0C99D2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client.csproj", "{947D82A1-30ED-4B1E-A993-53EDE0C99D2D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdatePackageSilo", "..\UpdatePackageSilo\UpdatePackageSilo.csproj", "{3377C464-FA94-4336-A928-B89EDA759A0E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceSilo", "..\DeviceSilo\DeviceSilo.csproj", "{1DD8A1B9-F6AE-4B6F-8FC5-EBE99B69D335}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLibrary", "..\SharedLibrary\SharedLibrary.csproj", "{ECADFF2D-2522-45F5-8ACD-A5BFD55AE4D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{1DD8A1B9-F6AE-4B6F-8FC5-EBE99B69D335}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DD8A1B9-F6AE-4B6F-8FC5-EBE99B69D335}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DD8A1B9-F6AE-4B6F-8FC5-EBE99B69D335}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECADFF2D-2522-45F5-8ACD-A5BFD55AE4D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECADFF2D-2522-45F5-8ACD-A5BFD55AE4D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECADFF2D-2522-45F5-8ACD-A5BFD55AE4D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECADFF2D-2522-45F5-8ACD-A5BFD55AE4D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
