@@ -4,9 +4,8 @@ using Orleans.Runtime;
 using Orleans.Serialization;
 using Orleans.Streaming.EventHubs;
 using Orleans.Streams;
-using static Azure.Core.HttpHeader;
 
-namespace Project1;
+namespace DeviceSilo;
 
 // Custom EventHubDataAdapter that serialize event using System.Text.Json
 public class CustomDataAdapter : EventHubDataAdapter

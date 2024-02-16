@@ -1,7 +1,7 @@
 ﻿using Orleans.Streams;
-using Project1.DomainEvents;
+using DomainEvents;
 
-namespace Project1.Grains
+namespace DeviceSilo
 {
     [GenerateSerializer]
     public class DeviceGrainState : DomainEventBase

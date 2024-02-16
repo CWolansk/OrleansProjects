@@ -14,6 +14,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Orleans.EventSourcing" Version="8.0.0" />
     <PackageReference Include="Microsoft.Orleans.OrleansSqlUtils" Version="2.4.5" />
     <PackageReference Include="Microsoft.Orleans.Persistence.AdoNet" Version="8.0.0" />
@@ -24,6 +25,12 @@
     <PackageReference Include="OrleansDashboard" Version="7.2.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DeviceSilo\DeviceSilo.csproj" />
+    <ProjectReference Include="..\SharedLibrary\SharedLibrary.csproj" />
+    <ProjectReference Include="..\UpdatePackageSilo\UpdatePackageSilo.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Project1.DomainEvents
+﻿namespace DomainEvents
 {
     [GenerateSerializer]
     public class DomainEventBase

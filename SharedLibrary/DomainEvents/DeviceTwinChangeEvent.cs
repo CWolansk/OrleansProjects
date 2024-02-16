@@ -1,6 +1,6 @@
 ﻿using Orleans.Streams;
 
-namespace Project1.DomainEvents
+namespace DomainEvents
 {
     [GenerateSerializer]
     public class DeviceTwinChangeEvent : DomainEventBase

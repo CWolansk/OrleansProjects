@@ -6,4 +6,23 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Orleans.EventSourcing" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Orleans.OrleansSQLUtils" Version="2.4.5" />
+    <PackageReference Include="Microsoft.Orleans.Persistence.AdoNet" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Orleans.Serialization" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Orleans.Server" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Orleans.Streaming.EventHubs" Version="8.0.0" />
+    <PackageReference Include="OrleansDashboard" Version="7.2.2" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
 </Project>

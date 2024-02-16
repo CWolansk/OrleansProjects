@@ -1,11 +1,10 @@
-﻿using Microsoft.VisualBasic;
-using Orleans.EventSourcing;
+﻿using Orleans.EventSourcing;
 using Orleans.Providers;
 using Orleans.Runtime;
 using Orleans.Streams;
-using Project1.DomainEvents;
+using DomainEvents;
 
-namespace Project1.Grains
+namespace DeviceSilo
 {
     public interface IDeviceGrain : IGrainWithStringKey
     {
