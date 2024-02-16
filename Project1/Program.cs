@@ -1,5 +1,11 @@
 using Orleans.Runtime;
 using Orleans.Storage;
+using Microsoft.Extensions.Hosting;
+using Orleans.Hosting;
+using Microsoft.VisualBasic;
+using Project1;
+using Microsoft.Extensions.Options;
+using Orleans.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,15 +15,44 @@ builder.Host.UseOrleans(siloBuilder =>
 {
     siloBuilder.UseLocalhostClustering();
 
-    siloBuilder.AddLogStorageBasedLogConsistencyProvider("LogStorage");
+    siloBuilder.Configure<ClusterOptions>(options =>
+    {
+        options.ClusterId = "DeviceUpdatesCluster";
+        options.ServiceId = "DeviceSilo";
+    });
 
-    siloBuilder.AddMemoryGrainStorage("OrleansLocalStorage");
+    siloBuilder.AddLogStorageBasedLogConsistencyProvider("LogStorage");
 
     siloBuilder.AddAdoNetGrainStorage("AzureSqlStorage", options =>
     {
         options.Invariant = "System.Data.SqlClient"; //https://learn.microsoft.com/en-us/dotnet/orleans/host/configuration-guide/adonet-configuration#persistence
-        options.ConnectionString = "";
+        options.ConnectionString = "<SQLSERVERCONNECTIONSTRING>";
     });
+
+    siloBuilder.AddAzureTableGrainStorage("PubSubStore", options =>
+    {
+        options.ConfigureTableServiceClient("AzureTableStorageConnectionString");
+    });
+
+    siloBuilder.AddEventHubStreams(
+            "my-stream-provider",
+            (ISiloEventHubStreamConfigurator configurator) =>
+            {
+                configurator.ConfigureEventHub(builder => builder.Configure(options =>
+                    options.ConfigureEventHubConnection("",
+                    "decog-eventhub-eastus-kew",
+                    "$Default")));
+
+                // We plug here our custom DataAdapter for Event Hub
+                configurator.UseDataAdapter((sp, n) => ActivatorUtilities.CreateInstance<CustomDataAdapter>(sp));
+
+                configurator.UseAzureTableCheckpointer(
+                    builder => builder.Configure(options =>
+                    {
+                        options.ConfigureTableServiceClient("AzureTableStorageConnectionString");
+                        options.PersistInterval = TimeSpan.FromSeconds(10);
+                    }));
+            });
 
     siloBuilder.UseDashboard(x => 
     {
