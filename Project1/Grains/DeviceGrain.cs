@@ -17,7 +17,7 @@ namespace Project1.Grains
         Task<List<DomainEventBase>> GetEvents();
     }
 
-    [StorageProvider(ProviderName = "OrleansLocalStorage")]
+    [StorageProvider(ProviderName = "AzureSqlStorage")]
     [LogConsistencyProvider(ProviderName = "LogStorage")]
     public class DeviceGrain: JournaledGrain<DeviceGrainState, DomainEventBase>, IDeviceGrain
     {

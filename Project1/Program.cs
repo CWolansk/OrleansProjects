@@ -1,4 +1,5 @@
 using Orleans.Runtime;
+using Orleans.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,12 @@ builder.Host.UseOrleans(siloBuilder =>
     siloBuilder.AddLogStorageBasedLogConsistencyProvider("LogStorage");
 
     siloBuilder.AddMemoryGrainStorage("OrleansLocalStorage");
+
+    siloBuilder.AddAdoNetGrainStorage("AzureSqlStorage", options =>
+    {
+        options.Invariant = "System.Data.SqlClient"; //https://learn.microsoft.com/en-us/dotnet/orleans/host/configuration-guide/adonet-configuration#persistence
+        options.ConnectionString = "";
+    });
 
     siloBuilder.UseDashboard(x => 
     {
